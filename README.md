@@ -56,16 +56,22 @@ In the Vose structure, when called it returns an index to a marble in proportion
 to its weight. In the VoseTree method it does the same. Here is some pseudocode
 for the VoseTree method.
 
-    rand():
-      rand_branch = random_branch()
-      branch = floor(binary_search(branches, rand_branch))
-      if nodes[branch] is bag:
-        return nodes[branch].rand()
-      else
-        return nodes[branch].ball
+```python
+def rand():
+  # Select a random real value in the range of the total weight
+  rand_val = random_branch()
 
-The random_branch function does a selection of the branches by the weight of each one.
-The binary search method is this structure makes each rand call Θ(log b) where `b` is the number
+  # Select the branch that falls in this range
+  branch = floor(binary_search(branches, rand_val))
+
+  if nodes[branch] is bag:
+    return nodes[branch].rand()
+  else:
+    return nodes[branch].ball
+```
+
+The random\_branch function does a selection of the branches by the weight of each one.
+The binary search method on this structure makes each rand() call Θ(log b) where `b` is the number
 of branches. So it is ideal to keep the number of branches as small as possible.
 If a bag is return or a ball is return it is performed in constant time.
 
@@ -80,10 +86,21 @@ into one large bag. Recall, each bag is a Vose structure.
 
 ## Parameters
 
-Choosing two parameters, `max_bags` and `max_marbles` is important for the performance of the structure.
+Choosing two parameters, `max\_bags` and `max\_marbles` is important for the performance of the structure.
 We would like to chose value for these parameters such that that accessing the extra bags and balls is
 identical to the cost of keeping one. This property is discussed in the paper `A Novel Index Supporting
 High Volume Data Warehouse Insertions.`
+
+
+## TODO 
+
+- [ ] Debug: Ensure multiple branches are being selected and not just the first node branch.
+- [ ] Add: Work proof out to ensure each node is being selected in proportion to its weight. (Important!!)
+- [ ] Add: A test that does random marbles and weights. Compare it with KL.
+- [ ] Add: A test that measures performance for varied values of `max\_bags` and `max\_balls`. Use Grid search to find best params.
+- [ ] Add: A method for bulk insertion 
+- [ ] Add: A compress() method that compresses duplicate items that have been added separatley.
+- [ ] Can I use some type of compression/encoding scheme to shrink the Vose structure?
 
 
 ## Related Papers
@@ -104,7 +121,7 @@ High Volume Data Warehouse Insertions.`
          publisher = {ACM},
          address = {New York, NY, USA},
         } 
-
+----
         @inproceedings{Jermaine:1999:NIS:645925.671517,
          author = {Jermaine, Chris and Datta, Anindya and Omiecinski, Edward},
          title = {A Novel Index Supporting High Volume Data Warehouse Insertion},
@@ -119,7 +136,7 @@ High Volume Data Warehouse Insertions.`
          publisher = {Morgan Kaufmann Publishers Inc.},
          address = {San Francisco, CA, USA},
         } 
-
+----
         @article{Vose:1991:LAG:126262.126280,
          author = {Vose, Michael D.},
          title = {A Linear Algorithm for Generating Random Numbers with a Given Distribution},
@@ -141,18 +158,3 @@ High Volume Data Warehouse Insertions.`
         }
 
 
-## TODO 
-
-[ ] Debug: Ensure multiple branches are being selected and not just the first node branch.
-
-[ ] Add: Work proof out to ensure each node is being selected in proportion to its weight. (Important!!)
-
-[ ] Add: A test that does random marbles and weights. Compare it with KL.
-
-[ ] Add: A test that measures performance for varied values of `max_bags` and `max_balls`. Use Grid search to find best params.
-
-[ ] Add: A method for bulk insertion 
-
-[ ] Add: A compress() method that compresses duplicate items that have been added separatley.
-
-[ ] Can I use some type of compression/encoding scheme to shrink the Vose structure?

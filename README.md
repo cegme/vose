@@ -17,7 +17,7 @@ discussion on Vose, see the blog post by Keith Schwarz entited
 [Darts, Dice, and Coins: Sampling from a Discrete Distribution]
 (http://www.keithschwarz.com/darts-dice-coins/).
 Vose Alias algorithm is based on a paper by Michael D. Vose entitled 
-[`A Linear Algorithm For Generating Random Numbers with a Given Distribution`]
+[A Linear Algorithm For Generating Random Numbers with a Given Distribution]
 (http://web.eecs.utk.edu/~vose/Publications/random.pdf).
 
 This algorithm allows building such a data structure in Θ(n) time and space
@@ -88,65 +88,71 @@ High Volume Data Warehouse Insertions.`
 
 ## Related Papers
 
-@inproceedings{Jermaine:2004:OMV:1007568.1007603,
- author = {Jermaine, Christopher and Pol, Abhijit and Arumugam, Subramanian},
- title = {Online Maintenance of Very Large Random Samples},
- booktitle = {Proceedings of the 2004 ACM SIGMOD International Conference on Management of Data},
- series = {SIGMOD '04},
- year = {2004},
- isbn = {1-58113-859-8},
- location = {Paris, France},
- pages = {299--310},
- numpages = {12},
- url = {http://doi.acm.org/10.1145/1007568.1007603},
- doi = {10.1145/1007568.1007603},
- acmid = {1007603},
- publisher = {ACM},
- address = {New York, NY, USA},
-} 
+        @inproceedings{Jermaine:2004:OMV:1007568.1007603,
+         author = {Jermaine, Christopher and Pol, Abhijit and Arumugam, Subramanian},
+         title = {Online Maintenance of Very Large Random Samples},
+         booktitle = {Proceedings of the 2004 ACM SIGMOD International Conference on Management of Data},
+         series = {SIGMOD '04},
+         year = {2004},
+         isbn = {1-58113-859-8},
+         location = {Paris, France},
+         pages = {299--310},
+         numpages = {12},
+         url = {http://doi.acm.org/10.1145/1007568.1007603},
+         doi = {10.1145/1007568.1007603},
+         acmid = {1007603},
+         publisher = {ACM},
+         address = {New York, NY, USA},
+        } 
 
-@inproceedings{Jermaine:1999:NIS:645925.671517,
- author = {Jermaine, Chris and Datta, Anindya and Omiecinski, Edward},
- title = {A Novel Index Supporting High Volume Data Warehouse Insertion},
- booktitle = {Proceedings of the 25th International Conference on Very Large Data Bases},
- series = {VLDB '99},
- year = {1999},
- isbn = {1-55860-615-7},
- pages = {235--246},
- numpages = {12},
- url = {http://dl.acm.org/citation.cfm?id=645925.671517},
- acmid = {671517},
- publisher = {Morgan Kaufmann Publishers Inc.},
- address = {San Francisco, CA, USA},
-} 
+        @inproceedings{Jermaine:1999:NIS:645925.671517,
+         author = {Jermaine, Chris and Datta, Anindya and Omiecinski, Edward},
+         title = {A Novel Index Supporting High Volume Data Warehouse Insertion},
+         booktitle = {Proceedings of the 25th International Conference on Very Large Data Bases},
+         series = {VLDB '99},
+         year = {1999},
+         isbn = {1-55860-615-7},
+         pages = {235--246},
+         numpages = {12},
+         url = {http://dl.acm.org/citation.cfm?id=645925.671517},
+         acmid = {671517},
+         publisher = {Morgan Kaufmann Publishers Inc.},
+         address = {San Francisco, CA, USA},
+        } 
 
-@article{Vose:1991:LAG:126262.126280,
- author = {Vose, Michael D.},
- title = {A Linear Algorithm for Generating Random Numbers with a Given Distribution},
- journal = {IEEE Trans. Softw. Eng.},
- issue_date = {September 1991},
- volume = {17},
- number = {9},
- month = sep,
- year = {1991},
- issn = {0098-5589},
- pages = {972--975},
- numpages = {4},
- url = {http://dx.doi.org/10.1109/32.92917},
- doi = {10.1109/32.92917},
- acmid = {126280},
- publisher = {IEEE Press},
- address = {Piscataway, NJ, USA},
- keywords = {arbitrary probability distribution, finite set, genetic algorithms, linear algorithm, probability, random number generation, random numbers, random variable, simple genetic algorithm},
-}
+        @article{Vose:1991:LAG:126262.126280,
+         author = {Vose, Michael D.},
+         title = {A Linear Algorithm for Generating Random Numbers with a Given Distribution},
+         journal = {IEEE Trans. Softw. Eng.},
+         issue_date = {September 1991},
+         volume = {17},
+         number = {9},
+         month = sep,
+         year = {1991},
+         issn = {0098-5589},
+         pages = {972--975},
+         numpages = {4},
+         url = {http://dx.doi.org/10.1109/32.92917},
+         doi = {10.1109/32.92917},
+         acmid = {126280},
+         publisher = {IEEE Press},
+         address = {Piscataway, NJ, USA},
+         keywords = {arbitrary probability distribution, finite set, genetic algorithms, linear algorithm, probability, random number generation, random numbers, random variable, simple genetic algorithm},
+        }
 
 
 ## TODO 
 
 [ ] Debug: Ensure multiple branches are being selected and not just the first node branch.
+
 [ ] Add: Work proof out to ensure each node is being selected in proportion to its weight. (Important!!)
+
 [ ] Add: A test that does random marbles and weights. Compare it with KL.
+
 [ ] Add: A test that measures performance for varied values of `max_bags` and `max_balls`. Use Grid search to find best params.
+
 [ ] Add: A method for bulk insertion 
+
 [ ] Add: A compress() method that compresses duplicate items that have been added separatley.
+
 [ ] Can I use some type of compression/encoding scheme to shrink the Vose structure?

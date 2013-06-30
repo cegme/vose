@@ -9,7 +9,6 @@ Compile the code and run test cases:
     make clean; make test
     ./test
 
-
 ## Vose Algorithm
 
 Vose algorithm is of of the best methods of sampling from a discreet distributon. For a
@@ -94,14 +93,7 @@ High Volume Data Warehouse Insertions.`
 
 ## TODO 
 
-- [ ] Debug: Ensure multiple branches are being selected and not just the first node branch.
-- [ ] Add: Work proof out to ensure each node is being selected in proportion to its weight. (Important!!)
-- [ ] Add: A test that does random marbles and weights. Compare it with KL.
-- [ ] Add: A test that measures performance for varied values of `max\_bags` and `max\_balls`. Use Grid search to find best params.
-- [ ] Add: A method for bulk insertion 
-- [ ] Add: A compress() method that compresses duplicate items that have been added separatley.
-- [ ] Can I use some type of compression/encoding scheme to shrink the Vose structure?
-
+See [Issues](https://github.com/cegme/vose/issues).
 
 ## Related Papers
 

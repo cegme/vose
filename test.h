@@ -17,6 +17,10 @@ public:
   bool test3();
   /** Test VoseTree bag compression */
   bool test4();
+  /** Test the VoseTree by adding marbles with random amounts */
+  bool test5();
+  /** Test the VoseTree by adding a large variety of marbles with random amounts */
+  bool test6();
 
 };
 

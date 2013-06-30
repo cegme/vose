@@ -254,6 +254,27 @@ bool test::test6() {
 }
 
 
+bool test::test7() {
+
+  std::cerr << "Need to make sure each branch is being selected.\n";
+
+  VoseTree tree;
+  tree.set_max_marbles(0);
+  tree.set_max_bags(4);
+
+  tree.add("red", 5);
+  tree.add("blue", 5);
+  tree.add("yellow", 5);
+  std::cerr << tree.toString();
+
+  for( size_t i = 0; i != 6; ++i) {
+    std::cerr << ">>> " << tree.rand_marble().label << "\n";
+  }
+
+  return true;
+}
+
+
 int main(int argc, char **argv) {
   
   test t;
@@ -275,6 +296,9 @@ int main(int argc, char **argv) {
 
   std::cout << "\nTest 6" << "----------------------------------------\n";
   t.test6();
+
+  std::cout << "\nTest 7" << "----------------------------------------\n";
+  t.test7();
 
 
  return 0;

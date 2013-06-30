@@ -21,6 +21,8 @@ public:
   bool test5();
   /** Test the VoseTree by adding a large variety of marbles with random amounts */
   bool test6();
+  /** Test to make sure all branches are being selected. */
+  bool test7();
 
 };
 

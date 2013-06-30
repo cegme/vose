@@ -140,7 +140,7 @@ std::string VoseTree::toString() {
 }
 
 
-std::map<std::string, long> VoseTree::histogram() {
+std::map<std::string, long> VoseTree::distribution() {
 
   std::map<std::string, long> map;
   std::for_each(nodes.cbegin(), nodes.cend(), [&map] (vosetreenode vtn) {
@@ -168,7 +168,7 @@ std::map<std::string, long> VoseTree::histogram() {
 
 std::map<std::string, double> VoseTree::probabilities() {
 
-  auto h = histogram();
+  auto h = distribution();
   std::map<std::string, double> prob;
   //map.resize(h.size());
   std::for_each(h.begin(), h.end(), [&] (std::pair<std::string, long> m) {
@@ -177,6 +177,8 @@ std::map<std::string, double> VoseTree::probabilities() {
   });
   return prob;
 }
+
+
 double VoseTree::kl(const std::map<std::string, double> &a, const std::map<std::string, double> &b) {
 
   /*std::cerr<< "a: ";
@@ -198,3 +200,31 @@ double VoseTree::kl(const std::map<std::string, double> &a, const std::map<std::
 }
 
 
+std::map<std::string, double> 
+    VoseTree::histogram(VoseTree tree, long samples) {
+
+    std::map<std::string,double> histogram;
+    long hist_sum = 0L;
+    for (int i = 0; i != samples; ++i) {
+      auto idx = tree.rand_marble();
+
+      if (histogram.find(idx.label) != histogram.end()) {
+        histogram[idx.label] += 1.0;
+        hist_sum += 1L;
+      }
+      else {
+        histogram.insert(std::make_pair(idx.label, 1.0));
+        hist_sum += 1L;
+      }
+    }
+    
+    std::map<std::string,double> new_hist;
+    std::for_each(histogram.cbegin(), histogram.cend(),
+      [&new_hist,hist_sum] (std::pair<const std::string, double> a) {
+        //std::cerr << a.first << ", " << (double)a.second/hist_sum << "\n";
+        new_hist.insert( std::make_pair(a.first,(double)a.second/hist_sum));
+    });
+
+    return new_hist;
+
+  }

@@ -139,19 +139,15 @@ bool test::test3() {
   std::cerr << "kl(histogram, exact_prob): " << kl1 << "\n";
   std::cerr << "kl(exact_prob, histogram): " << kl2 << "\n";
   
-  
-
   return true;
 }
 
 
 bool test::test4() {
 
-  
   VoseTree tree;
   tree.set_max_marbles(4);
   tree.set_max_bags(5);
-
 
   std::cerr << tree.toString();
   for(size_t i = 0; i != 10; ++i) {
@@ -163,6 +159,97 @@ bool test::test4() {
     std::cerr << tree.toString();
   }
 
+  return true;
+}
+
+
+bool test::test5() {
+
+  VoseTree tree;
+  tree.set_max_marbles(4);
+  tree.set_max_bags(5);
+
+  // Generate a set of label names.
+  std::string labels[7] = {"red", "yellow", "pink", "green", "purple", 
+                           "orange", "blue"};
+
+  // Make a random number generator for marble labels
+  std::default_random_engine label_generator(VoseUtil::RANDOM_SEED); 
+  std::uniform_int_distribution<size_t>
+    label_distribution(0, 7-1);
+  std::function<size_t()> random_label =
+    std::bind(label_distribution, label_generator);
+  
+  // Make a random number generator for marble weights
+  std::default_random_engine weight_generator(VoseUtil::RANDOM_SEED); 
+  std::uniform_int_distribution<long>
+    weight_distribution(1, 1000);
+  std::function<long()> random_weight =
+    std::bind(weight_distribution, weight_generator);
+
+  for(size_t i = 0; i != 50; ++i) {
+    // Get a random marble with random label and random weight.
+    size_t label_idx = random_label();
+    size_t weight = random_weight();
+    //std::cerr << "label_idx: " << label_idx << ", " << labels[label_idx] << "\n";
+    //std::cerr << " weight: " << weight << "\n";
+    tree.add(std::string(labels[label_idx]), weight);
+    std::cerr << tree.toString();
+  }
+
+  // Generate a histogram.
+  auto hist = VoseTree::histogram(tree, 50000L);
+
+  // Get the real probabilities
+  auto prob = tree.probabilities();
+
+  // Compare the results
+  double kl1 = VoseTree::kl(hist, prob);
+  double kl2 = VoseTree::kl(prob, hist);
+  std::cerr << "kl(hist, prob): " << kl1 << "\n";
+  std::cerr << "kl(prob, hist): " << kl2 << "\n";
+  return true;
+}
+
+
+bool test::test6() {
+
+  VoseTree tree;
+  tree.set_max_marbles(4);
+  tree.set_max_bags(5);
+
+  // Generate a set of label names.
+  std::string labels = "red yellow blue";
+
+  // Make a random number generator for marble weights
+  std::default_random_engine weight_generator(VoseUtil::RANDOM_SEED); 
+  std::uniform_int_distribution<long>
+    weight_distribution(1, 1000);
+  std::function<long()> random_weight =
+    std::bind(weight_distribution, weight_generator);
+
+  // FIXME why does 280 node work? Where is the error, need more stats
+  for(size_t i = 0; i != 279; ++i) {
+    // Get a random marble with random label and random weight.
+    size_t weight = random_weight();
+    //std::cerr << "label_idx: " << label_idx << ", " << labels[label_idx] << "\n";
+    //std::cerr << " weight: " << weight << "\n";
+    std::random_shuffle(labels.begin(), labels.end());
+    tree.add(labels, weight);
+    //std::cerr << tree.toString();
+  }
+
+  // Generate a histogram.
+  auto hist = VoseTree::histogram(tree, 50000L);
+
+  // Get the real probabilities
+  auto prob = tree.probabilities();
+
+  // Compare the results
+  double kl1 = VoseTree::kl(hist, prob);
+  double kl2 = VoseTree::kl(prob, hist);
+  std::cerr << "kl(hist, prob): " << kl1 << "\n";
+  std::cerr << "kl(prob, hist): " << kl2 << "\n";
   return true;
 }
 
@@ -182,6 +269,12 @@ int main(int argc, char **argv) {
   
   std::cout << "\nTest 4" << "----------------------------------------\n";
   t.test4();
+  
+  std::cout << "\nTest 5" << "----------------------------------------\n";
+  t.test5();
+
+  std::cout << "\nTest 6" << "----------------------------------------\n";
+  t.test6();
 
 
  return 0;

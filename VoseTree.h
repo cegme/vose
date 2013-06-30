@@ -90,7 +90,12 @@ public:
     * Calculate the probability of each of the keys.
     */
   std::map<std::string, double> probabilities();
-  std::map<std::string, long> histogram();
+  /** Find the distribution of weights in the vose tree. */
+  std::map<std::string, long> distribution();
+  
+  /** Sample from the tree, and return the probability each marble is selected. */
+  static std::map<std::string, double> 
+    histogram(VoseTree tree, long samples);
 
   static double kl(const std::map<std::string, double> &a, const std::map<std::string, double> &b);
 

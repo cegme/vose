@@ -135,7 +135,7 @@ See [Issues](https://github.com/cegme/vose/issues).
      publisher = {ACM},
      address = {New York, NY, USA},
     } 
-    ----
+----
     @inproceedings{Jermaine:1999:NIS:645925.671517,
      author = {Jermaine, Chris and Datta, Anindya and Omiecinski, Edward},
      title = {A Novel Index Supporting High Volume Data Warehouse Insertion},
@@ -150,7 +150,7 @@ See [Issues](https://github.com/cegme/vose/issues).
      publisher = {Morgan Kaufmann Publishers Inc.},
      address = {San Francisco, CA, USA},
     } 
-    ----
+----
     @article{Vose:1991:LAG:126262.126280,
      author = {Vose, Michael D.},
      title = {A Linear Algorithm for Generating Random Numbers with a Given Distribution},

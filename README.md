@@ -69,7 +69,7 @@ def rand():
     return nodes[branch].ball
 ```
 
-The random\_branch function does a selection of the branches by the weight of each one.
+The random_branch function does a selection of the branches by the weight of each one.
 The binary search method on this structure makes each rand() call Θ(log b) where `b` is the number
 of branches. So it is ideal to keep the number of branches as small as possible.
 If a bag is return or a ball is return it is performed in constant time.
@@ -85,10 +85,32 @@ into one large bag. Recall, each bag is a Vose structure.
 
 ## Parameters
 
-Choosing two parameters, `max\_bags` and `max\_marbles` is important for the performance of the structure.
+Choosing two parameters, _max_bags_ and _max_marbles_ is important for the performance of the structure.
 We would like to chose value for these parameters such that that accessing the extra bags and balls is
 identical to the cost of keeping one. This property is discussed in the paper `A Novel Index Supporting
 High Volume Data Warehouse Insertions.`
+
+## Proofs
+
+How do we know that each marball is selected in proportion to its weight? Lets check with the probability
+of selecting an item.
+
+The probability of selecting a branch b_i is the weight of the branch over the total weight of 
+all the branches. That is: p(b_i) = b_i / (\Sigma_i b_i).
+
+Attached to each of the branches are either free marbles or bags of marbles.
+The probability of selecting a free marble is the probability of selecting that marbles branch
+multiplied by 1, because there is no other decision to make once that free matble is selected.
+That is P(free_marble) = p(m_b_i) * 1.
+
+The probability of selecting a marble from inside a bag is the probability of selecting the bag times
+the probability of selecting the ball inside the bag. Let m_b_i be the marble inside a bag. Therefore,
+P(marball in a bag) = p(m_b_i | b_i) = (m_b_i / b_i) * (b_i / \Sigma_i b_i). We can cancel out the cost
+of the branches and we get  (m_b_i / \Sigma_i b_i), this is the exact cost of one marble. This validates
+our tree structure.
+
+This is the proof for a tree of height one. A similar proof may work for the case of a tree high greater 
+than one.
 
 
 ## TODO 
@@ -97,56 +119,56 @@ See [Issues](https://github.com/cegme/vose/issues).
 
 ## Related Papers
 
-        @inproceedings{Jermaine:2004:OMV:1007568.1007603,
-         author = {Jermaine, Christopher and Pol, Abhijit and Arumugam, Subramanian},
-         title = {Online Maintenance of Very Large Random Samples},
-         booktitle = {Proceedings of the 2004 ACM SIGMOD International Conference on Management of Data},
-         series = {SIGMOD '04},
-         year = {2004},
-         isbn = {1-58113-859-8},
-         location = {Paris, France},
-         pages = {299--310},
-         numpages = {12},
-         url = {http://doi.acm.org/10.1145/1007568.1007603},
-         doi = {10.1145/1007568.1007603},
-         acmid = {1007603},
-         publisher = {ACM},
-         address = {New York, NY, USA},
-        } 
-----
-        @inproceedings{Jermaine:1999:NIS:645925.671517,
-         author = {Jermaine, Chris and Datta, Anindya and Omiecinski, Edward},
-         title = {A Novel Index Supporting High Volume Data Warehouse Insertion},
-         booktitle = {Proceedings of the 25th International Conference on Very Large Data Bases},
-         series = {VLDB '99},
-         year = {1999},
-         isbn = {1-55860-615-7},
-         pages = {235--246},
-         numpages = {12},
-         url = {http://dl.acm.org/citation.cfm?id=645925.671517},
-         acmid = {671517},
-         publisher = {Morgan Kaufmann Publishers Inc.},
-         address = {San Francisco, CA, USA},
-        } 
-----
-        @article{Vose:1991:LAG:126262.126280,
-         author = {Vose, Michael D.},
-         title = {A Linear Algorithm for Generating Random Numbers with a Given Distribution},
-         journal = {IEEE Trans. Softw. Eng.},
-         issue_date = {September 1991},
-         volume = {17},
-         number = {9},
-         month = sep,
-         year = {1991},
-         issn = {0098-5589},
-         pages = {972--975},
-         numpages = {4},
-         url = {http://dx.doi.org/10.1109/32.92917},
-         doi = {10.1109/32.92917},
-         acmid = {126280},
-         publisher = {IEEE Press},
-         address = {Piscataway, NJ, USA},
-         keywords = {arbitrary probability distribution, finite set, genetic algorithms, linear algorithm, probability, random number generation, random numbers, random variable, simple genetic algorithm},
-        }
+    @inproceedings{Jermaine:2004:OMV:1007568.1007603,
+     author = {Jermaine, Christopher and Pol, Abhijit and Arumugam, Subramanian},
+     title = {Online Maintenance of Very Large Random Samples},
+     booktitle = {Proceedings of the 2004 ACM SIGMOD International Conference on Management of Data},
+     series = {SIGMOD '04},
+     year = {2004},
+     isbn = {1-58113-859-8},
+     location = {Paris, France},
+     pages = {299--310},
+     numpages = {12},
+     url = {http://doi.acm.org/10.1145/1007568.1007603},
+     doi = {10.1145/1007568.1007603},
+     acmid = {1007603},
+     publisher = {ACM},
+     address = {New York, NY, USA},
+    } 
+    ----
+    @inproceedings{Jermaine:1999:NIS:645925.671517,
+     author = {Jermaine, Chris and Datta, Anindya and Omiecinski, Edward},
+     title = {A Novel Index Supporting High Volume Data Warehouse Insertion},
+     booktitle = {Proceedings of the 25th International Conference on Very Large Data Bases},
+     series = {VLDB '99},
+     year = {1999},
+     isbn = {1-55860-615-7},
+     pages = {235--246},
+     numpages = {12},
+     url = {http://dl.acm.org/citation.cfm?id=645925.671517},
+     acmid = {671517},
+     publisher = {Morgan Kaufmann Publishers Inc.},
+     address = {San Francisco, CA, USA},
+    } 
+    ----
+    @article{Vose:1991:LAG:126262.126280,
+     author = {Vose, Michael D.},
+     title = {A Linear Algorithm for Generating Random Numbers with a Given Distribution},
+     journal = {IEEE Trans. Softw. Eng.},
+     issue_date = {September 1991},
+     volume = {17},
+     number = {9},
+     month = sep,
+     year = {1991},
+     issn = {0098-5589},
+     pages = {972--975},
+     numpages = {4},
+     url = {http://dx.doi.org/10.1109/32.92917},
+     doi = {10.1109/32.92917},
+     acmid = {126280},
+     publisher = {IEEE Press},
+     address = {Piscataway, NJ, USA},
+     keywords = {arbitrary probability distribution, finite set, genetic algorithms, linear algorithm, probability, random number generation, random numbers, random variable, simple genetic algorithm},
+    }
 
 

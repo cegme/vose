@@ -170,5 +170,14 @@ See [Issues](https://github.com/cegme/vose/issues).
      address = {Piscataway, NJ, USA},
      keywords = {arbitrary probability distribution, finite set, genetic algorithms, linear algorithm, probability, random number generation, random numbers, random variable, simple genetic algorithm},
     }
+----
+    @article{goldberg1991comparative,
+     title={A comparative analysis of selection schemes used in genetic algorithms},
+     author={Goldberg, David E and Deb, Kalyanmoy},
+     journal={Urbana},
+     volume={51},
+     pages={61801--2996},
+     year={1991}
+    }
 
 
